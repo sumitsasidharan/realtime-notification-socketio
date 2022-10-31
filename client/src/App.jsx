@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 function App() {
    const [username, setUsername] = useState("");
-   const [user, setUser] = useState('ponnu');
+   const [user, setUser] = useState('');
    const [socket, setSocket] = useState(null);
    
    useEffect(() => {
@@ -17,7 +17,7 @@ function App() {
    }, [])
 
    useEffect(() => {
-      socket.emit('newUser', user);
+      socket?.emit('newUser', user);
    }, [socket, user])
 
   return (
@@ -26,7 +26,7 @@ function App() {
            <>
               <Navbar socket={socket} />
               {posts.map((post) => (
-                 <Card key={post.id} post={post} socket={socket} />
+                 <Card key={post.id} post={post} socket={socket} user={user} />
               ))}
 
               <span className="username">{user}</span>
